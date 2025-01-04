@@ -1,15 +1,35 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
 import { Container, Row, Col, Alert, Button } from "react-bootstrap";
 import { FaInfoCircle, FaStar, FaTag, FaShoppingCart } from "react-icons/fa";
+import { useParams } from "react-router-dom";
+
+
 
 function Productdetail() {
+  const [productinfo,setProductinfo]=useState([])
+  const {id}= useParams()
+  useEffect(()=>{
+    axios.get("http://localhost:3000/product").
+    then((res)=>{
+      console.log(res.data)
+      const selectedProduct=res.data.find((item)=>item.id==id)
+      console.log(selectedProduct)
+      setProductinfo(selectedProduct)
+      
+    }).catch((err)=>{
+      console.log(err)
+    })
+
+  },[])
   return (
     <div className="bg-slate-100" style={{ height: "100vh" }}>
       <Container className="bg-white py-5 my-5">
         <Row>
           <Col className="p-3" md={4}>
-            <img src="https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg" />
+
+            <img src={productinfo.image} className="w-100" />
             <div className="mt-3 flex justify-content-around gap-2">
               <Button
                 className="w-100"
@@ -47,7 +67,7 @@ function Productdetail() {
             <h4>Men Regular Fit Printed Spread Collar Casual Shirt</h4>
             <span className="text-green-700">Special price</span>
             <h1 className="mb-0">
-              &#8377; 359
+              &#8377; {productinfo.price}
               <span className="text-xl	text-slate-400 ps-4">
                 <strike>&#8377; 1499</strike>
               </span>
