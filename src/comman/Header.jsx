@@ -3,7 +3,10 @@
 import { FaShoppingCart } from 'react-icons/fa';
 import { Link ,Outlet} from 'react-router-dom';
 
+import { useSelector } from 'react-redux';
+
 const Header = () => {
+  const cartdata=useSelector(state=>state.cartdata)
   return (
     <div>
       <header className="flex justify-between items-center p-4 bg-gray-800 text-white">
@@ -16,7 +19,10 @@ const Header = () => {
       </nav>
       <div className="flex items-center space-x-2">
         <input type="text" placeholder="Search products..." className="p-2 rounded bg-gray-700 text-white" />
+        <Link to="/cart">
+        <p>{cartdata}</p>
         <FaShoppingCart className="text-2xl cursor-pointer hover:text-gray-400" />
+        </Link>
       </div>
       
     </header>

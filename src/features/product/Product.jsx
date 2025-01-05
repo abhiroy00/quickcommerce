@@ -1,15 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+
 import { Link } from "react-router-dom";
 
 export default function Product() {
   const [products, setProduct] = useState([]);
 
+
   useEffect(() => {
     axios
       .get("http://localhost:3000/product")
       .then((res) => {
-        console.log(res.data);
+      
         setProduct(res.data);
       })
       .catch((err) => {

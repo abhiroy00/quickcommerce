@@ -2,139 +2,85 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { Container, Row, Col, Alert, Button } from "react-bootstrap";
 import { FaInfoCircle, FaStar, FaTag, FaShoppingCart } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 function Cart() {
+  const cartitem = useSelector(state => state.productdata);
+  console.log("cart item", cartitem);
+
   return (
     <div>
       <Container>
         <Row className="mt-5">
           <Col md={8} className="bg-white">
-            <div className="container mx-auto p-4 border rounded-lg shadow-md mt-3 bg-white flex items-start space-x-4">
-              {/* Product Image */}
-              <div className="w-1/6">
-                <img
-                  src="https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg"
-                  alt="Product"
-                  className="rounded-md"
-                />
-                <div className="flex items-center border rounded-md overflow-hidden mt-3">
-                  <button className="px-2 py-1 bg-gray-200 hover:bg-gray-300">
-                    -
-                  </button>
-                  <span className="px-3 py-1">1</span>
-                  <button className="px-2 py-1 bg-gray-200 hover:bg-gray-300">
-                    +
-                  </button>
-                </div>
-              </div>
+            {
+              cartitem.map((product, index) => (
+                <div key={index} className="container mx-auto p-4 border rounded-lg shadow-md mt-3 bg-white flex items-start space-x-4">
+                  {/* Product Image */}
+                  <div className="w-1/6">
+                    <img
+                      src={product.image}
+                      alt="Product"
+                      className="rounded-md"
+                    />
+                    <div className="flex items-center border rounded-md overflow-hidden mt-3">
+                      <button className="px-2 py-1 bg-gray-200 hover:bg-gray-300">
+                        -
+                      </button>
+                      <span className="px-3 py-1">1</span>
+                      <button className="px-2 py-1 bg-gray-200 hover:bg-gray-300">
+                        +
+                      </button>
+                    </div>
+                  </div>
 
-              {/* Product Details */}
-              <div className="w-2/3 space-y-1">
-                <h5 className="font-bold text-lg">
-                  FAOES Colorblock Men Round Neck Multicolor T-Shirt
-                </h5>
-                <p className="text-gray-500 text-sm">Size: M</p>
-                <p className="text-gray-500 text-sm">
-                  Seller: <span className="font-medium">RocketIndia</span>{" "}
-                  <span className="text-blue-600 font-semibold">Assured</span>
-                </p>
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-400 line-through text-sm">
-                    ₹1,299
-                  </span>
-                  <span className="text-xl font-bold text-black">₹279</span>
-                  <span className="text-green-600 text-sm">78% Off</span>
-                  <span className="text-green-600 text-sm">
-                    1 offer available
-                  </span>
-                </div>
-                <p className="text-gray-500 text-sm">
-                  Delivery by <span className="font-medium">Thu Jan 9</span> |{" "}
-                  <span className="line-through text-gray-400">₹40</span>{" "}
-                  <span className="text-green-600">Free</span>
-                </p>
-                <div className="flex space-x-2 text-sm">
-                  <button className="text-black text-base	 hover:underline  font-semibold	">
-                    SAVE FOR LATER
-                  </button>
-                  <button className="text-black text-base	 hover:underline font-semibold	">
-                    REMOVE
-                  </button>
-                </div>
-              </div>
+                  {/* Product Details */}
+                  <div className="w-2/3 space-y-1">
+                    <h5 className="font-bold text-lg">
+                      FAOES Colorblock Men Round Neck Multicolor T-Shirt
+                    </h5>
+                    <p className="text-gray-500 text-sm">Size: M</p>
+                    <p className="text-gray-500 text-sm">
+                      Seller: <span className="font-medium">RocketIndia</span>{" "}
+                      <span className="text-blue-600 font-semibold">Assured</span>
+                    </p>
+                    <div className="flex items-center space-x-2">
+                      <span className="text-gray-400 line-through text-sm">
+                        ₹1,299
+                      </span>
+                      <span className="text-xl font-bold text-black">₹279</span>
+                      <span className="text-green-600 text-sm">78% Off</span>
+                      <span className="text-green-600 text-sm">
+                        1 offer available
+                      </span>
+                    </div>
+                    <p className="text-gray-500 text-sm">
+                      Delivery by <span className="font-medium">Thu Jan 9</span> |{" "}
+                      <span className="line-through text-gray-400">₹40</span>{" "}
+                      <span className="text-green-600">Free</span>
+                    </p>
+                    <div className="flex space-x-2 text-sm">
+                      <button className="text-black text-base hover:underline font-semibold">
+                        SAVE FOR LATER
+                      </button>
+                      <button className="text-black text-base hover:underline font-semibold">
+                        REMOVE
+                      </button>
+                    </div>
+                  </div>
 
-              {/* Quantity & Actions */}
-              <div className="w-1/6 flex flex-col items-end space-y-2">
-                <p className="text-gray-500 text-sm">
-                  Delivery by <span className="font-medium">Thu Jan 9</span> |{" "}
-                  <span className="line-through text-gray-400">₹40</span>{" "}
-                  <span className="text-green-600">Free</span>
-                </p>
-              </div>
-            </div>
-            <div className="container mx-auto p-4 border rounded-lg shadow-md mt-3 bg-white flex items-start space-x-4">
-              {/* Product Image */}
-              <div className="w-1/6">
-                <img
-                  src="https://fakestoreapi.com/img/71-3HjGNDUL._AC_SY879._SX._UX._SY._UY_.jpg"
-                  alt="Product"
-                  className="rounded-md"
-                />
-                <div className="flex items-center border rounded-md overflow-hidden mt-3">
-                  <button className="px-2 py-1 bg-gray-200 hover:bg-gray-300">
-                    -
-                  </button>
-                  <span className="px-3 py-1">1</span>
-                  <button className="px-2 py-1 bg-gray-200 hover:bg-gray-300">
-                    +
-                  </button>
+                  {/* Quantity & Actions */}
+                  <div className="w-1/6 flex flex-col items-end space-y-2">
+                    <p className="text-gray-500 text-sm">
+                      Delivery by <span className="font-medium">Thu Jan 9</span> |{" "}
+                      <span className="line-through text-gray-400">₹40</span>{" "}
+                      <span className="text-green-600">Free</span>
+                    </p>
+                  </div>
                 </div>
-              </div>
+              ))
+            }
 
-              {/* Product Details */}
-              <div className="w-2/3 space-y-1">
-                <h5 className="font-bold text-lg">
-                  FAOES Colorblock Men Round Neck Multicolor T-Shirt
-                </h5>
-                <p className="text-gray-500 text-sm">Size: M</p>
-                <p className="text-gray-500 text-sm">
-                  Seller: <span className="font-medium">RocketIndia</span>{" "}
-                  <span className="text-blue-600 font-semibold">Assured</span>
-                </p>
-                <div className="flex items-center space-x-2">
-                  <span className="text-gray-400 line-through text-sm">
-                    ₹1,299
-                  </span>
-                  <span className="text-xl font-bold text-black">₹279</span>
-                  <span className="text-green-600 text-sm">78% Off</span>
-                  <span className="text-green-600 text-sm">
-                    1 offer available
-                  </span>
-                </div>
-                <p className="text-gray-500 text-sm">
-                  Delivery by <span className="font-medium">Thu Jan 9</span> |{" "}
-                  <span className="line-through text-gray-400">₹40</span>{" "}
-                  <span className="text-green-600">Free</span>
-                </p>
-                <div className="flex space-x-2 text-sm">
-                  <button className="text-black text-base	 hover:underline  font-semibold	">
-                    SAVE FOR LATER
-                  </button>
-                  <button className="text-black text-base	 hover:underline font-semibold	">
-                    REMOVE
-                  </button>
-                </div>
-              </div>
-
-              {/* Quantity & Actions */}
-              <div className="w-1/6 flex flex-col items-end space-y-2">
-                <p className="text-gray-500 text-sm">
-                  Delivery by <span className="font-medium">Thu Jan 9</span> |{" "}
-                  <span className="line-through text-gray-400">₹40</span>{" "}
-                  <span className="text-green-600">Free</span>
-                </p>
-              </div>
-            </div>
             <div className="d-flex justify-content-end my-4">
               <Button
                 variant="warning"

@@ -4,25 +4,38 @@ import "bootstrap/dist/css/bootstrap.css";
 import { Container, Row, Col, Alert, Button } from "react-bootstrap";
 import { FaInfoCircle, FaStar, FaTag, FaShoppingCart } from "react-icons/fa";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { AddTocart } from "./productSlice";
+import { cartAdd } from "../cart/cartSlice";
 
 
 
 function Productdetail() {
   const [productinfo,setProductinfo]=useState([])
+  const [data,setdata]=useState(null)
+  const dispatch=useDispatch()
   const {id}= useParams()
   useEffect(()=>{
     axios.get("http://localhost:3000/product").
     then((res)=>{
       console.log(res.data)
       const selectedProduct=res.data.find((item)=>item.id==id)
-      console.log(selectedProduct)
+      
+      setdata(selectedProduct)
       setProductinfo(selectedProduct)
       
     }).catch((err)=>{
       console.log(err)
     })
-
   },[])
+
+
+  function handleAddtocart(){
+    dispatch(AddTocart(data))
+    dispatch(cartAdd())
+    
+  }
   return (
     <div className="bg-slate-100" style={{ height: "100vh" }}>
       <Container className="bg-white py-5 my-5">
@@ -31,6 +44,7 @@ function Productdetail() {
 
             <img src={productinfo.image} className="w-100" />
             <div className="mt-3 flex justify-content-around gap-2">
+              <Link to="/cart">
               <Button
                 className="w-100"
                 variant="warning"
@@ -41,10 +55,12 @@ function Productdetail() {
                   fontSize: "16px",
                   display: "block",
                 }}
+                onClick={handleAddtocart}
               >
                 <FaShoppingCart className="text-md cursor-pointer hover:text-gray-400 inline-block" />
                 <span className="ps-1">ADD TO CART</span>
               </Button>
+              </Link>
               <Button
                 className="w-100"
                 variant="warning"
