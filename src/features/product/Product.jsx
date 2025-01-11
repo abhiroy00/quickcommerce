@@ -1,17 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import "bootstrap/dist/css/bootstrap.css";
 import { Link } from "react-router-dom";
 
 export default function Product() {
   const [products, setProduct] = useState([]);
 
-
   useEffect(() => {
     axios
       .get("http://localhost:3000/product")
       .then((res) => {
-      
         setProduct(res.data);
       })
       .catch((err) => {
@@ -26,24 +24,36 @@ export default function Product() {
           Customers also purchased
         </h2>
 
-        <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+        <div className="mt-6 row">
           {products.map((product) => (
-            <Link key={product.id} to={`/product/${product.id}`}>
-              <div className="group relative">
+            <Link
+              key={product.id}
+              to={`/product/${product.id}`}
+              className="no-underline col-md-3 d-flex align-items-stretch mb-4"
+            >
+              <div
+                className="group relative "
+                style={{
+                  border: "1px solid #ddd",
+                  padding: "10px 10px 0px 10px",
+                }}
+              >
                 <img
                   alt={product.imageAlt}
                   src={product.image}
-                  className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80"
+                  className="aspect-square w-full rounded-md bg-gray-200 object-cover group-hover:opacity-75 lg:aspect-auto lg:h-80 lg:w-80"
                 />
-                <div className="mt-4 flex justify-between">
+                <div className="mt-4 align-items-center " align="center">
                   <div>
                     <h3 className="text-sm text-gray-700">
-                      <span aria-hidden="true" className="absolute inset-0" />
+                      <span aria-hidden="true" className="absolute inset-0 " />
                       {product.title}
                     </h3>
-                    <p className="mt-1 text-sm text-gray-500">{product.color}</p>
+                    <p className="mt-1 text-sm text-gray-500">
+                      {product.color}
+                    </p>
                   </div>
-                  <p className="text-sm font-medium text-gray-900">{product.price}</p>
+                  <h5 className=" text-gray-900">$ {product.price}</h5>
                 </div>
               </div>
             </Link>
